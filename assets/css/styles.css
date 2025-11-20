@@ -1,0 +1,8 @@
+body {
+	font-family: "Carlito";
+}
+
+/* Apply Gentium Plus only to IPA text */
+.ipa {
+	font-family: "Gentium Plus" !important;
+}

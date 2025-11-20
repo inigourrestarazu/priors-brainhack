@@ -1,0 +1,275 @@
+
+
+# *I know that I know nothing*, or do I? A workshop on priors for Bayesian Modeling
+
+Alternative title: “Reverse-engineering (Bayesian) Data Analysis”
+
+> **Warning**
+>
+> Please, note many aspects of this document are subject to change,
+> especially those related to the schedule.
+
+## Goal
+
+The goal is pretty simple: learn how to think about priors, and apply
+that knowledge to your own research.
+
+## Abstract
+
+Bayesian Data Analysis (BDA) offers a powerful toolkit to study human
+cognition and, overall, behaviour, where data collection tends to be
+very demanding, limited, and time consuming. Yet, BDA often becomes a
+daunting experience as it requires that the analyst specifies prior
+distributions for all model parameters, and newcomers to BDA often feel
+that they do not know at all how to define sensible priors for their
+analysis. In consequence, they rely on the default priors used by the
+software implementation used, e.g. `brms` (Bürkner 2017).
+
+In the workshop, we will work on how to define (sensible) priors for a
+range of data sets. First, we shall see that, upon reflection, reasoning
+and the most simple knowledge of the world allows to constrain the
+parameter space of priors. Second, researchers are experts in their own
+fields, and we will discuss how we can leverage our expertise to find
+(more) suitable priors. Finally, we will approach prior definition
+through data simulation, as an empirical workflow to reassure our choice
+of prior distributions. Thus, the workshop aims to empower analysts to
+take full advantage of the possibilities offered by BDA.
+
+## Learning goals
+
+### Main learning goals
+
+The main learning goal is to be able to specify priors on your own,
+specially through data simulation.
+
+### Secondary learning goals
+
+Although they may not be the main goals, all data analysis is connected.
+Thus, improving your understanding of one end, may help you understand
+others. Most importantly:
+
+**Regression analysis** Data simulation in particular helps really
+understand how regression models work.
+
+**Bayesian Data Analysis.** Of course, it is about Bayesian Data
+Analysis. Thus, it is expected that you improve your skills related to
+it.
+
+**Optimal defaults.** The software used for BDA comes with its own
+defaults. Yet, these defaults may not be optimal, or may be outdated. We
+will see some tweakings of those defaults.
+
+**Juicing hierarchical models.** Hierarchical regression models are
+commonplace nowadays. Yet, they are still used primarily for Null
+Hypothesis Significance Testing. As a consequence of the overfixation
+with *significance* of *main effects*, we are only grasping the surface
+of the information hierarchical regression models offer to understand
+human behaviour and cognition.
+
+**Location-scale modeling**, a.k.a. distributional modeling. Did you
+ever have hypotheses about the variability in the response, not about
+the average? This can be easily analysed with Bayesian location-scale
+models. The data set that we will simulate will have varying variances,
+and we will see how to analyse this kind of data without assuming
+*homoscedasticity*.
+
+### Transversal learnings
+
+Although they are not the main learning goal, some skills are
+transversal, and are incorporated to some degree through the entire
+workshop.
+
+**Reproducible pipelines in R with `renv`.**
+[`renv`](https://rstudio.github.io/renv/articles/renv.html) is a R
+package that helps create reproducible analyses. Put very simply, it
+keeps track of the packages installed and their versions, so that those
+exact versions can be installed in another machine.
+
+**Git.** [Git](https://git-scm.com/) is a free and open source version
+control system. In its most simple use case, Git allows to keep track of
+the changes made in a given project. In combination with platforms like
+[GitLab]() or [GitHub](), we can keep track of projects and collaborate.
+
+**Continuous integration pipelines.** We may take advantage of
+Continuous Integration (CI) capabilities offered by code-hosting
+platforms such as GitLab or GitHub, to build reproducible pipelines.
+
+**Quarto.** [Quarto](https://quarto.org/) is an Free and Open Source
+scientific and technical publishing system, that allows to combine
+written text —in markdown format—, and code —multiple languages
+supported— to produce documents in a variety of formats, e.g. html, pdf,
+Word, etc.
+
+## Schedule
+
+### Day 1: Data simulation
+
+30’: ensure all are set up (Stan, Git, brms…)
+
+1h: hierarchical structure of data sets (conceptual)
+
+1h: data simulation (hands-on)
+
+30’: presentation of data sets
+
+**Milestones**
+
+-   Simulate a data set with a target continuous response
+
+-   Simulate a data set with a target discrete response
+
+### Day 2: Priors for simple models
+
+30’: Open discussion on priors for parameters of a Gaussian model
+
+30’: Individual / team discussion on priors for a real data set analysed
+as Gaussian
+
+30’: Presentation and team feedback on the priors developed
+
+30’: Open discussion on priors for parameters of a Bernoulli models
+
+30’: Individual / team discussion on priors for a real data set analysed
+as Bernoulli
+
+30’: Presentation and team feedback on the priors developed
+
+**Milestones**
+
+-   Priors for hierarchical Gaussian regression models
+
+-   Priors for hierarchical regression models with logarithmic
+    transformations
+
+### Day 3: Complex models
+
+30’: Open discussion on priors for parameters of a location-scale model
+
+30’: Individual / team discussion on priors for a real data set analysed
+as a location-scale model
+
+30’: Presentation and team feedback on the developed priors
+
+30’: Open discussion on priors for parameters of a multivariate model
+
+30’: Individual / team discussion on priors for a real data set analysed
+as a multivariate model
+
+30’: Presentation and team feedback on the developed priors
+
+**Milestones**
+
+-   Priors for location-scale models
+
+-   Priors for multivariate models
+
+## Required expertise
+
+Some expertise is required in order to follow the workshop, both at
+conceptual (abstract knowledge) and technical levels.
+
+### Conceptual
+
+**Regression:** minimally, you should have fitted some frequentist
+hierarchical regression models —a.k.a. multilevel models, random-effects
+models—, and tried their Bayesian equivalents. Ideally, participants
+should have worked with some introductory materials to Bayesian Data
+Analysis, such as Barreda and Silbert (2023).
+
+### Technical
+
+**R:** You should be comfortable with R. You should have wrangled some
+data (with base R or Tidyverse, Wickham et al. (2019)). You should have
+fitted hierarchical regression models with R. Optimally, you should have
+fitted or tried to fit Bayesian models with `brms`.
+
+**Git:** You should know that Git exists. You do not need to be an
+active user, but it should not sound strange to you.
+
+## Set up
+
+Before coming, you should have installed an ready the following pieces
+of software and setups.
+
+Please, install the packages from the sources specified here.
+
+### R and Bayesian regression tools
+
+-   **R**: latest version (at least \>4.5).
+
+I believe it comes installed in most mainstream Linux distributions.
+
+In Macos, use [Homebrew](https://brew.sh/):
+
+    brew install r
+
+In Windows, I believe you have to download the executable.
+**IMPORTANT**: download and install from the official site
+[here](https://cran.r-project.org/).
+
+-   **cmdstanr**: latest version. Check documentation
+    [here](https://mc-stan.org/cmdstanr/).
+
+<!-- -->
+
+    # we recommend running this in a fresh R session or restarting your current session
+    install.packages("cmdstanr", repos = c('https://stan-dev.r-universe.dev', getOption("repos")))
+
+-   **brms**: latest version. Check the
+    [website](https://paulbuerkner.com/brms/).
+
+<!-- -->
+
+    install.packages('brms')
+
+-   **Quarto**: latest version
+
+### Git
+
+-   **Git**: Windows users should install it from
+    [here](https://git-scm.com/) (Linux / Macos users have it by
+    default).
+
+-   **git-lfs**: Large File Support for Git. Git compresses all the
+    files, and does not handle big files easily. The Large File Support
+    extension allows to overcome this limitation.
+
+Arch Linux —I use Arch, btw—:
+
+    yay -S git-lfs
+
+Ubuntu / Debian based:
+
+Macos, with [Homebrew](https://brew.sh/):
+
+    brew install git-lfs
+
+-   GitLab/GitHub account. I recommend that you create an account either
+    in GitLab, or GitHub. The basic tears are free, and that’s all we
+    need. GitLab is Free and Open Source. GitHub is not, but it has many
+    more users, more built-in tools, and a nice Student free version.
+
+## Suggested readings
+
+-   Nicenboim, Schad, and Vasishth (2025)
+
+## References
+
+Barreda, Santiago, and Noah Silbert. 2023. *Bayesian Multilevel Models
+for Repeated Measures Data: A Conceptual and Practical Introduction in
+R*. Abingdon, Oxon ; New York, NY: Routledge.
+
+Bürkner, Paul-Christian. 2017. “<span class="nocase">brms</span>: An R
+Package for Bayesian Multilevel Models Using Stan.” *Journal of
+Statistical Software* 80 (1): 1–28.
+<https://doi.org/10.18637/jss.v080.i01>.
+
+Nicenboim, Bruno, Daniel J. Schad, and Shravan Vasishth. 2025. “The Art
+and Science of Prior Elicitation (Online Appendix).” In *Introduction to
+Bayesian Data Analysis for Cognitive Science*. CRC.
+<https://bruno.nicenboim.me/bayescogsci/ch-priors.html>.
+
+Wickham, Hadley, Mara Averick, Jennifer Bryan, Winston Chang, Lucy
+D’Agostino McGowan, Romain François, Garrett Grolemund, et al. 2019.
+“Welcome to the <span class="nocase">tidyverse</span>.” *Journal of Open
+Source Software* 4 (43): 1686. <https://doi.org/10.21105/joss.01686>.
